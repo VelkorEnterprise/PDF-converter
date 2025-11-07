@@ -14,7 +14,7 @@ const Step: React.FC<{ number: number; title: string; description: string; }> = 
 
 const Features: React.FC = () => {
     return (
-        <section id="how-to" className="py-20 bg-surface">
+        <section id="how-to" className="py-20 bg-gradient-to-br from-white to-amber-200">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary">How to Convert Files to and from PDF Free</h2>

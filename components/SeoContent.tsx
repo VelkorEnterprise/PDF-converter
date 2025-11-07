@@ -28,7 +28,7 @@ const FaqItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 
 const SeoContent: React.FC = () => {
     return (
-        <section id="about" className="py-20 bg-background">
+        <section id="about" className="py-20 bg-gradient-to-br from-white to-amber-100">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="prose max-w-none lg:prose-lg mx-auto text-text-secondary">
                     <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary text-center">Unlock Your Document Potential with the Ultimate Free PDF Converter</h2>

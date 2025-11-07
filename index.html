@@ -41,7 +41,6 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-
         .scene {
             width: 200px;
             height: 200px;
@@ -53,7 +52,8 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            animation: spin-3d 30s infinite linear;
+            transform: translateZ(-100px);
+            animation: spin-3d 15s infinite linear;
         }
 
         .face {
@@ -65,47 +65,25 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ffffff, #fb923c);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c2410c;
+            font-weight: bold;
             font-size: 1rem;
-            font-weight: 600;
-            color: #9a3412; /* orange-800 */
-            background: linear-gradient(145deg, #fff7ed 0%, #ffedd5 100%); /* orange-50 to orange-100 */
-            border: 1px solid #fed7aa; /* orange-200 */
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .face > div {
-            font-size: 2.5rem;
-        }
-
-        .face::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -85%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            animation: glare 5s infinite;
+            text-align: center;
         }
 
         .front  { transform: rotateY(  0deg) translateZ(100px); }
-        .right  { transform: rotateY( 90deg) translateZ(100px); }
         .back   { transform: rotateY(180deg) translateZ(100px); }
+        .right  { transform: rotateY( 90deg) translateZ(100px); }
         .left   { transform: rotateY(-90deg) translateZ(100px); }
         .top    { transform: rotateX( 90deg) translateZ(100px); }
         .bottom { transform: rotateX(-90deg) translateZ(100px); }
 
         @keyframes spin-3d {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to   { transform: rotateX(360deg) rotateY(360deg); }
-        }
-
-        @keyframes glare {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
+          from { transform: translateZ(-100px) rotateX(0deg) rotateY(0deg); }
+          to   { transform: translateZ(-100px) rotateX(360deg) rotateY(360deg); }
         }
     </style>
     

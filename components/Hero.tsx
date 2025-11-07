@@ -22,9 +22,12 @@ const Hero: React.FC<HeroProps> = ({ onToolSelect }) => {
     );
 
     return (
-        <section id="hero" className="bg-background pt-16 pb-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="max-w-3xl mx-auto bg-surface p-8 sm:p-12 border-2 border-dashed border-primary/50 rounded-2xl text-center">
+        <section id="hero" className="relative overflow-hidden bg-gradient-to-br from-white to-amber-100 pt-16 pb-20">
+            <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-amber-200 rounded-full opacity-30 blur-3xl" aria-hidden="true"></div>
+            <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-80 h-80 bg-amber-200 rounded-full opacity-30 blur-3xl" aria-hidden="true"></div>
+            
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="max-w-3xl mx-auto bg-surface/80 backdrop-blur-sm p-8 sm:p-12 border-2 border-dashed border-primary/50 rounded-2xl text-center">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-text-primary leading-tight mb-4">
                         Online PDF Converter
                     </h1>

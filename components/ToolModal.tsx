@@ -307,8 +307,8 @@ const ToolModal: React.FC<ToolModalProps> = ({ tool, onClose }) => {
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={onClose}>
             <div className="bg-surface rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
                 <div className="p-6 border-b border-border-color flex justify-between items-center">
-                    <h2 className="text-2xl font-bold text-text-primary flex items-center gap-4">
-                        <span className={`text-2xl w-10 h-10 ${tool.color} rounded-lg flex items-center justify-center`}>{tool.icon}</span> 
+                    <h2 className="text-3xl font-bold text-text-primary flex items-center gap-4">
+                        <span className={`text-4xl w-14 h-14 ${tool.color} rounded-lg flex items-center justify-center`}>{tool.icon}</span> 
                         {tool.name}
                     </h2>
                     <button onClick={onClose} className="text-text-secondary hover:text-text-primary text-3xl font-light">&times;</button>

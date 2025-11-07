@@ -11,45 +11,51 @@ const FooterLogo = () => (
     </div>
 );
 
-const useAnimatedCounter = (end: number, duration: number = 2000) => {
+const useAnimatedCounter = (end: number, duration: number = 2500) => {
     const [count, setCount] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
     const hasAnimated = useRef(false);
 
     useEffect(() => {
+        const element = ref.current;
+        let animationFrameId: number;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting && !hasAnimated.current) {
+                if (entry.isIntersecting && !hasAnimated.current && element) {
                     hasAnimated.current = true;
-                    let start = 0;
-                    const endValue = end;
-                    const frameDuration = 1000 / 60;
-                    const totalFrames = Math.round(duration / frameDuration);
-                    const increment = endValue / totalFrames;
+                    let startTimestamp: number | null = null;
 
-                    const counter = () => {
-                        start += increment;
-                        if (start < endValue) {
-                            setCount(Math.ceil(start));
-                            requestAnimationFrame(counter);
+                    const step = (timestamp: number) => {
+                        if (!startTimestamp) startTimestamp = timestamp;
+                        const progress = timestamp - startTimestamp;
+                        const percentage = Math.min(progress / duration, 1);
+                        const easedPercentage = 1 - Math.pow(1 - percentage, 3); // easeOutCubic
+                        const currentCount = Math.floor(easedPercentage * end);
+                        
+                        setCount(currentCount);
+
+                        if (progress < duration) {
+                            animationFrameId = requestAnimationFrame(step);
                         } else {
-                            setCount(endValue);
+                            setCount(end);
                         }
                     };
-                    requestAnimationFrame(counter);
-                    observer.disconnect();
+                    animationFrameId = requestAnimationFrame(step);
+                    observer.unobserve(element);
                 }
             },
             { threshold: 0.1 }
         );
 
-        if (ref.current) {
-            observer.observe(ref.current);
+        if (element) {
+            observer.observe(element);
         }
 
         return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
+            cancelAnimationFrame(animationFrameId);
+            if (element) {
+                observer.unobserve(element);
             }
         };
     }, [end, duration]);
@@ -59,14 +65,11 @@ const useAnimatedCounter = (end: number, duration: number = 2000) => {
 
 
 const Footer: React.FC = () => {
-    // A smaller, more manageable number for demonstration.
     const finalCount = 371572951;
     const { count, ref } = useAnimatedCounter(finalCount);
     
     const formatCount = (num: number) => {
-        const str = Math.floor(num).toLocaleString('en-US').replace(/,/g, '');
-        // Split into groups for styling to mimic the screenshot
-        return str.split('').join(' ');
+        return num.toLocaleString('en-US');
     };
 
     const links = {
@@ -88,7 +91,7 @@ const Footer: React.FC = () => {
     };
 
     return (
-        <footer className="bg-surface border-t border-border-color pt-16">
+        <footer className="bg-gradient-to-t from-amber-100 to-white border-t border-border-color pt-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {Object.entries(links).map(([title, linkItems]) => (
@@ -109,7 +112,7 @@ const Footer: React.FC = () => {
 
                 <div className="text-center py-16">
                     <FooterLogo />
-                    <div ref={ref} className="my-6 text-4xl md:text-5xl font-bold text-primary tracking-[0.2em] font-mono">
+                    <div ref={ref} className="my-6 text-4xl md:text-5xl font-bold text-primary tracking-wider font-mono">
                         {formatCount(count)}
                     </div>
                     <p className="text-text-secondary">files converted since 2005</p>

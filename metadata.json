@@ -1,0 +1,5 @@
+{
+  "name": "PDF Converter",
+  "description": "A clean, fast, and free online application offering a comprehensive suite of tools for converting, merging, splitting, and managing PDF files. Inspired by leading designs and built with React and Tailwind CSS for a professional and intuitive user experience.",
+  "requestFramePermissions": []
+}
